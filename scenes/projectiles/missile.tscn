@@ -1,0 +1,88 @@
+[gd_scene load_steps=6 format=3 uid="uid://d077bh50m3ocv"]
+
+[ext_resource type="Texture2D" uid="uid://byh64e8bklb3l" path="res://graphics/exhaust.png" id="1_liya7"]
+[ext_resource type="Texture2D" uid="uid://c3cnx77mnunql" path="res://graphics/missiles.png" id="2_rovcw"]
+
+[sub_resource type="Animation" id="Animation_liya7"]
+resource_name = "Exhast Flame"
+length = 0.8
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Exhaust:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_rovcw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Exhaust:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nsqj0"]
+_data = {
+&"Exhast Flame": SubResource("Animation_liya7"),
+&"RESET": SubResource("Animation_rovcw")
+}
+
+[node name="Missile" type="Node2D"]
+
+[node name="Exhaust" type="Sprite2D" parent="."]
+position = Vector2(0.5, 61)
+texture = ExtResource("1_liya7")
+hframes = 4
+
+[node name="Rockets" type="Node2D" parent="."]
+
+[node name="Large" type="Area2D" parent="Rockets"]
+visible = false
+position = Vector2(-0.5, 0)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Rockets/Large"]
+polygon = PackedVector2Array(-2.5, 32, 3.5, 32, 4.5, 31, 4.5, 29, 3.5, 27, 2.5, 26, 1.5, 25, 9.5, 25, 10.5, 24, 10.5, 22, 9.5, 20, 8.5, 18, 7.5, 16, 6.5, 14, 5.5, 14, 5.5, -16, 4.5, -22, 3.5, -26, 2.5, -29, 1.5, -31, 0.5, -32, -0.5, -31, -1.5, -29, -2.5, -26, -3.5, -22, -4.5, -16, -4.5, 14, -5.5, 14, -6.5, 16, -7.5, 18, -8.5, 20, -9.5, 22, -9.5, 24, -8.5, 25, -0.5, 25, -1.5, 26, -2.5, 27, -3.5, 29, -3.5, 31)
+
+[node name="Sprite2D" type="Sprite2D" parent="Rockets/Large"]
+texture = ExtResource("2_rovcw")
+hframes = 3
+
+[node name="Marker2D" type="Marker2D" parent="Rockets/Large"]
+position = Vector2(0, 61)
+
+[node name="Small" type="Area2D" parent="Rockets"]
+position = Vector2(-0.5, 0)
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Rockets/Small"]
+texture = ExtResource("2_rovcw")
+hframes = 3
+frame = 1
+
+[node name="Marker2D" type="Marker2D" parent="Rockets/Small"]
+position = Vector2(0, 61)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Rockets/Small"]
+polygon = PackedVector2Array(0.5, -21, 1.5, -20, 2.5, -17, 2.5, -10, 3.5, -10, 4.5, -9, 5.5, -7, 5.5, -4, 2.5, -4, 2.5, 8, 3.5, 8, 4.5, 10, 5.5, 12, 6.5, 14, 7.5, 16, 8.5, 18, 8.5, 22, -7.5, 22, -7.5, 18, -6.5, 16, -5.5, 14, -4.5, 12, -3.5, 10, -2.5, 8, -1.5, 8, -1.5, -4, -4.5, -4, -4.5, -7, -3.5, -9, -2.5, -10, -1.5, -10, -1.5, -17, -0.5, -20)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_nsqj0")
+}

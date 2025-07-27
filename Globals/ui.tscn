@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://bk8ffhchdymgt"]
+
+[ext_resource type="Script" uid="uid://6qfv27euho38" path="res://Globals/ui.gd" id="1_qiwnj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wm5dl"]
+font_size = 32
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_qiwnj")
+
+[node name="Labels" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Distance" type="Label" parent="Labels"]
+layout_mode = 0
+offset_right = 60.0
+offset_bottom = 45.0
+text = "0"
+label_settings = SubResource("LabelSettings_wm5dl")
+
+[node name="Lives" type="Label" parent="Labels"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1820.0
+offset_right = 1880.0
+offset_bottom = 45.0
+grow_horizontal = 0
+text = "0"
+label_settings = SubResource("LabelSettings_wm5dl")
